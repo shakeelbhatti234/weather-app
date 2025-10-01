@@ -1,0 +1,25 @@
+:root{
+    --bs-primary: #f7b41a;
+}
+.text-primary{
+    color: var(--bs-primary) !important;
+}
+.h-heading{
+    font-family: Contrail One;
+    font-size: 4.7rem;
+    color: #FFFFFF;
+    line-height: 1.1;
+}
+.bg-color{
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+
+}
+.text-heading{
+    color: #FFFFFF;
+}
+.btn-primary{
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
