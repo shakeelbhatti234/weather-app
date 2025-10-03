@@ -5,15 +5,16 @@ import { useEffect, useState } from 'react';
 function App() {
   const [data, setdata] = useState ();
   const [loading , setLoading] = useState (true);
+  const [city, setCity] = useState ('Lahore');
 
 
-  useEffect( ()=> { fetch('http://api.weatherapi.com/v1/current.json?key=f4222bd54dbf4d4697045151250210&q=Lahore')
+  useEffect( ()=> { fetch(`http://api.weatherapi.com/v1/current.json?key=f4222bd54dbf4d4697045151250210 &q=${city}`)
     .then(res => res.json())
     .then(weather => {
       setdata(weather);
       setLoading(false);
     });
-  } , []);
+  } , [city]);
   
 if(loading)
   {return(<h1>Loading...</h1>);
@@ -57,17 +58,20 @@ if(loading)
           <div className='col-3 bg-color rounded-end-5 rounded-start-5 align-items-center text-center text-white'>
             <div>
               <form className="d-flex mt-5 " >
-                <input className="form-control rounded-pill me-2" type="search" placeholder="Search City" />
+                <input 
+                onChange={text => setCity(text.target.value) }
+                value={city}
+                className="form-control rounded-pill me-2" type="search" placeholder="Search City" />
               </form>
             </div>
             <div>
-              <img src="image/Weather image.png" className='w-75 h-100' />
+              <img src={data.current.condition.icon} className='w-75 h-100' />
               <div className='text-center' style={{ fontSize: "20px" }}>
                 <h1>{data.current.temp_c} </h1>
               </div>
             </div>
             <div className='d-flex gap-5 pb-3 justify-content-center '>
-              Kuala Lumpur
+              {data.location.name}
               <div>
                 Monday
               </div>
@@ -274,7 +278,7 @@ if(loading)
                   Normal
                 </div>
                 <div>
-                  <img src='/image/barometer.png' style={{ marginLeft: "70px" }} />
+                  <img src={data.current.condition.icon} style={{ marginLeft: "70px" }} />
                 </div>
                </div>
               </div>
